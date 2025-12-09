@@ -2,12 +2,12 @@
 
 from src.main import PlagiarismDetector
 
+
 def test_preprocess_text():
     detector = PlagiarismDetector()
     text = "Machine learning is a subset of artificial intelligence!"
     result = detector.preprocess_text(text)
     words = result.split()
-    
     assert "machine" in words
     assert "learning" in words
     assert "subset" in words
@@ -17,6 +17,7 @@ def test_preprocess_text():
     assert "a" not in words
     assert "is" not in words
     assert "of" not in words
+
 
 def test_cosine_similarity():
     detector = PlagiarismDetector()
@@ -29,6 +30,7 @@ def test_cosine_similarity():
     similarity = float(sim_matrix[0][1])
     assert similarity > 0.84  # реалистичное значение
 
+
 def test_lcs():
     detector = PlagiarismDetector()
     s1 = "machine learning model"
@@ -36,12 +38,14 @@ def test_lcs():
     score = detector.longest_common_subsequence(s1, s2)
     assert score >= len("machine learning ")
 
+
 def test_ngram_similarity():
     detector = PlagiarismDetector()
     s1 = "neural network deep"
     s2 = "neural network deep"
     score = detector.ngram_similarity(s1, s2, n=2)
     assert score == 1.0
+
 
 def test_detect_plagiarism():
     detector = PlagiarismDetector(threshold=0.75)
@@ -54,4 +58,4 @@ def test_detect_plagiarism():
     assert len(results) == 1
     i, j, score = results[0]
     assert i == 0 and j == 1
-    assert score >= 0.75  
+    assert score >= 0.75
