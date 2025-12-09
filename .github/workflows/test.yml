@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download NLTK data (punkt_tab)
+      - name: Download NLTK punkt_tab manually (for Python 3.12+)
         run: |
           mkdir -p $HOME/nltk_data/tokenizers
           curl -L -o $HOME/nltk_data/tokenizers/punkt_tab.zip \
@@ -38,6 +38,7 @@ jobs:
         run: |
           flake8 src/ tests/
 
+          
       - name: Run unit tests
         run: |
-          pytest tests/ -v --tb=short
+          PYTHONPATH=. python -m pytest tests/ -v --tb=short
