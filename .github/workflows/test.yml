@@ -27,18 +27,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download NLTK punkt_tab manually (for Python 3.12+)
+      - name: Download NLTK data
         run: |
-          mkdir -p $HOME/nltk_data/tokenizers
-          curl -L -o $HOME/nltk_data/tokenizers/punkt_tab.zip \
-            https://github.com/nltk/nltk_data/raw/gh-pages/packages/tokenizers/punkt_tab.zip
-          unzip -o $HOME/nltk_data/tokenizers/punkt_tab.zip -d $HOME/nltk_data/tokenizers/
+          python -c "
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+          "
 
       - name: Lint with flake8
         run: |
           flake8 src/ tests/
 
-          
       - name: Run unit tests
         run: |
           PYTHONPATH=. python -m pytest tests/ -v --tb=short
