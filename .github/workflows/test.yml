@@ -26,10 +26,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
+
       - name: Download NLTK data (all languages)
         run: |
-          python -c "import nltk; nltk.download('punkt', quiet=True); nltk.download('stopwords', quiet=True); nltk.download('wordnet', quiet=True)"
+          python -c "import nltk; nltk.download('punkt', quiet=True);
+          nltk.download('stopwords', quiet=True);
+          nltk.download('wordnet', quiet=True)"
 
       - name: Lint with flake8
         run: |
