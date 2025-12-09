@@ -23,8 +23,7 @@ class PlagiarismDetector:
 
     def __init__(self, threshold=0.6):
         self.threshold = threshold
-        self.stop_words = set(stopwords.words('russian') +
-                              stopwords.words('english'))
+        self.stop_words = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
 
     def preprocess_text(self, text):
